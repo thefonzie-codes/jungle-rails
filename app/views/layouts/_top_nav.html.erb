@@ -43,6 +43,7 @@
         </li> %>
       </ul>
       <ul class="navbar-nav">
+      <% unless current_user %>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-danger"
@@ -67,6 +68,17 @@
         <li class="nav-item end-0">
         <%= link_to "About", "/about/index" , class: "nav-link" %>
         </li>
+        <li class="nav-item end-0">
+        <%= link_to "Log Out", new_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item end-0">
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item end-0">
+        <%= link_to "About", "/about/index" , class: "nav-link" %>
+        </li>
+      <% end %>
       </ul>
     </div>
   </div>
