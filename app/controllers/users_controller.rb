@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   def index
+    if current_user.blank?
+      render plain: '401 Unauthorized', status: :unauthorized
+    end
     @users = User.all
   end
 
@@ -22,7 +25,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user)
+      .permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
 end
